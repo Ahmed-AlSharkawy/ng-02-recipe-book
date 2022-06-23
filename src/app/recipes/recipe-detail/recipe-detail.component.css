@@ -1,0 +1,11 @@
+.card-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+img {
+  width: 100%;
+  max-height: max(400px, 60vh);
+}

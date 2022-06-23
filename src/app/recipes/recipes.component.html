@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="{{ recipe ? ' col-md-5' : 'full-width-list' }} ">
+    <h3>
+      <app-recipe-list></app-recipe-list>
+    </h3>
+  </div>
+  <div class="col-md-7" *ngIf="recipe">
+    <h3>
+      <app-recipe-detail [recipe]="recipe"></app-recipe-detail>
+    </h3>
+  </div>
+</div>

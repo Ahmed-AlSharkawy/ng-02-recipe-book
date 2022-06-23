@@ -1,0 +1,18 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card img {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.card-body {
+  align-self: baseline;
+}

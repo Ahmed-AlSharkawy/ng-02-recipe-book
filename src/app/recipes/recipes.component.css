@@ -1,0 +1,4 @@
+.full-width-list {
+  max-width: min(90%, 740px);
+  margin: 0 auto;
+}

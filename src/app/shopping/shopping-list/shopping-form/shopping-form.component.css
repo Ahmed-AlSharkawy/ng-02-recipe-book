@@ -1,0 +1,28 @@
+.container {
+  max-width: min(95%, 1024px);
+}
+
+form {
+  border: 1px solid rgb(218, 217, 217);
+  border-radius: 5px;
+  padding: 1rem 1.5rem;
+}
+
+.row {
+  margin-bottom: 1rem;
+  row-gap: 0.5rem;
+}
+
+.btngroup {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btngroup button {
+  padding: 5px 20px;
+}
+
+form label {
+  font-size: 0.85rem;
+}

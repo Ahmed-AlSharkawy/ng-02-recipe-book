@@ -1,0 +1,13 @@
+<app-shopping-form></app-shopping-form>
+
+<div class="list-group">
+  <a
+    *ngFor="let ingredient of ingredients; let i = index"
+    href="#"
+    class="list-group-item list-group-item-action list-group-item-{{
+      i % 2 ? 'danger' : 'primary'
+    }}"
+    >{{ ingredient.name }} ({{ ingredient.amount }})</a
+  >
+</div>
+<br /><br /><br /><br /><br />

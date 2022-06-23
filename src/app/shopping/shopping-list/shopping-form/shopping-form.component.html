@@ -1,0 +1,68 @@
+<div class="container">
+  <form>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="form-floating">
+          <!-- <input
+            type="text"
+            id="ingredient"
+            [(ngModel)]="ingredient"
+            [ngModelOptions]="{ standalone: true }"
+            class="form-control"
+            placeholder="ingredient"
+          /> -->
+          <input
+            type="text"
+            id="ingredient"
+            class="form-control"
+            placeholder="ingredient"
+            #nameInput
+          />
+          <label
+            for="ingredient"
+            class="text-success"
+            style="font-weight: bold;"
+            >Ingredient</label
+          >
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="form-floating">
+          <!-- <input
+            type="number"
+            id="amount"
+            [(ngModel)]="amount"
+            [ngModelOptions]="{ standalone: true }"
+            class="form-control"
+            placeholder="amount"
+            min="1"
+          /> -->
+          <input
+            type="number"
+            id="amount"
+            class="form-control"
+            placeholder="amount"
+            min="1"
+            #amountInput
+          />
+          <label for="amount" class="text-success" style="font-weight: bold;"
+            >Amount</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="btngroup">
+      <button
+        type="submit"
+        class="btn btn-outline-success"
+        (click)="onSubmitForm()"
+      >
+        Add
+      </button>
+      <button type="button" class="btn btn-outline-primary">Clear</button>
+      <button type="button" class="btn btn-outline-danger">Delete</button>
+    </div>
+  </form>
+</div>
+<br />
