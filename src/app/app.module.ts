@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingListService } from './shared/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
+import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, AppRoutingModule],
@@ -24,6 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     RecipeDetailComponent,
     ShoppingListComponent,
     ShoppingFormComponent,
+    RecipeFormComponent,
   ],
   providers: [ShoppingListService],
   bootstrap: [AppComponent],

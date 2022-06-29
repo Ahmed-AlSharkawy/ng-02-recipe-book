@@ -59,6 +59,10 @@ export class RecipeService {
 
   getRecipe(index: number) {
     this.reecipeChanged.emit(this.recipes[index]);
+    if (index >= 0 && index < this.recipes.length)
+      return this.recipes[index]
+
+    return null;
   }
 
   addToShoppingList(recipe: Recipe) {

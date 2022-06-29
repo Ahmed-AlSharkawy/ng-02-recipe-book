@@ -2,3 +2,13 @@
   max-width: min(90%, 740px);
   margin: 0 auto;
 }
+
+.recipes-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 5rem;
+}
+
+.recipes-list {
+  flex: 1 0 40%;
+}

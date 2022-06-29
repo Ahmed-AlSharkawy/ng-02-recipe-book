@@ -15,8 +15,10 @@ export class RecipeListComponent implements OnInit {
   }
 
   ngOnInit() {}
-
+  
+/* 
   onShowRecipeDetails(index: number) {
     this.recipeService.getRecipe(index);
-  }
+  } 
+*/
 }

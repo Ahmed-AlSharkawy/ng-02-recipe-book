@@ -6,23 +6,25 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  @Output() onViewChanged = new EventEmitter<string>();
-  active: string = 'recipe';
+  // @Output() onViewChanged = new EventEmitter<string>();
+  // active: string = 'recipe';
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  onShowRecipe() {
-    if (this.active == 'recipe') return;
-    console.log('info');
-    this.active = 'recipe';
-    this.onViewChanged.emit('recipe');
-  }
+  /* OLD NAVIGATION APPROACH
+   onShowRecipe() {
+      if (this.active == 'recipe') return;
+      console.log('info');
+      this.active = 'recipe';
+      this.onViewChanged.emit('recipe');
+    }
 
-  onShowShoppingList() {
-    if (this.active == 'shoppinglist') return;
-    this.active = 'shoppinglist';
-    this.onViewChanged.emit('shoppinglist');
-  }
+    onShowShoppingList() {
+      if (this.active == 'shoppinglist') return;
+      this.active = 'shoppinglist';
+      this.onViewChanged.emit('shoppinglist');
+    }
+  */
 }

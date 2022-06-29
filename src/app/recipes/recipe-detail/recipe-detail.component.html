@@ -1,28 +1,23 @@
-<div class="card">
+<div class="card recipes-details">
   <img src="{{ recipe.imagePath }}" class="card-img-top" alt="..." />
   <div class="card-body">
     <div class="card-title mb-3">
       <h5>{{ recipe.name }}</h5>
       <div class="btn-group">
-        <button
-          class="btn btn-outline-primary btn-sm dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
           Manage Recipe
         </button>
-        <ul
-          class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
-          aria-labelledby="dropdownMenuButton2"
-        >
+        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
           <li>
             <button class="dropdown-item" (click)="addToShoppingList()">
               To Shopping List
             </button>
           </li>
-          <li><button class="dropdown-item">Edit Recipe</button></li>
-          <li><hr class="dropdown-divider" /></li>
+          <li><button class="dropdown-item" [routerLink]="['/recipes/edit', index]">Edit Recipe</button></li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
           <li>
             <button class="dropdown-item text-danger">Delete Recipe</button>
           </li>
@@ -35,13 +30,9 @@
     <hr />
     <h6 class="card-subtitle mb-2 text-muted">
       Ingredients :
-      <ng-container
-        *ngFor="let ingredient of recipe.ingredients; let i = index"
-      >
+      <ng-container *ngFor="let ingredient of recipe.ingredients; let i = index">
         {{ ingredient.name }} ({{ ingredient.amount }}){{
-          i < recipe.ingredients.length - 1 ? ', ' : ''
-        }}
-      </ng-container>
+        i < recipe.ingredients.length - 1 ? ', ' : '' }} </ng-container>
     </h6>
   </div>
 </div>
