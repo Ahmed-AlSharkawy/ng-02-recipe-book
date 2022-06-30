@@ -1,4 +1,5 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Recipe } from '../recipes/recipe-model';
 import { Ingredient } from './ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
@@ -6,7 +7,7 @@ import { ShoppingListService } from './shopping-list.service';
 @Injectable()
 export class RecipeService {
   private recipes: Recipe[];
-  @Output() reecipeChanged = new EventEmitter<Recipe>();
+  @Output() recipeChanged = new Subject<Recipe>();
 
   constructor(private shoppingListService: ShoppingListService) {
     this.recipes = [
@@ -58,7 +59,7 @@ export class RecipeService {
   }
 
   getRecipe(index: number) {
-    this.reecipeChanged.emit(this.recipes[index]);
+    this.recipeChanged.next(this.recipes[index]);
     if (index >= 0 && index < this.recipes.length)
       return this.recipes[index]
 
