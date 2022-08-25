@@ -1,3 +1,77 @@
+<div class="row">
+  <form class="row" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <div class="col-md-12 mb-2">
+      <label for="name-input" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name-input" formControlName="name">
+      <p class="error" *ngIf="recipeForm.get('name').invalid && recipeForm.get('name').touched">
+        * name is required</p>
+    </div>
+
+    <div class="col-md-8 mb-2">
+      <label for="image-input" class="form-label">Image URL</label>
+      <input type="text" class="form-control" id="image-input" formControlName="imagePath" #imgURL>
+      <p class="error" *ngIf="recipeForm.get('imagePath').invalid && recipeForm.get('imagePath').touched">
+        * name is required</p>
+    </div>
+
+    <div class="col-md-4 text-center mt-2">
+      <img [src]="imgURL.value" alt="" class="Rounded" style="width: 75px; max-height: 75px; object-fit: cover;">
+    </div>
+
+    <div class="col-md-12 mb-2">
+      <label for="desc-input" class="form-label">Description</label>
+      <textarea class="form-control" id="desc-input" rows="2" formControlName="description"></textarea>
+      <p class="error" *ngIf="recipeForm.get('description').invalid && recipeForm.get('description').touched">
+        * name is required</p>
+    </div>
+
+    <div class="col-md-12 mb-2" formArrayName="ingredients">
+      <div class="row my-2 align-items-center">
+        <div class="col">
+          <h3>Ingredients </h3>
+        </div>
+        <div class="col text-center">
+          <button type="button" class="btn btn-outline-primary btn-sm " (click)="onAddIngredient()">Add
+            Ingredient</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row mb-2 align-items-center form-group"
+        *ngFor="let group of recipeForm.get('ingredients')['controls']; let i = index" [formGroupName]="i">
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="ingredient-input" formControlName="name" placeholder="name">
+        </div>
+
+        <div class="col-md-3">
+          <input type="number" class="form-control" id="amount-input" formControlName="amount" placeholder="amount">
+        </div>
+
+        <div class="col-md-1">
+          <button type="button" class="btn btn-sm btn-outline-danger fw-bold" (click)="onDeleteIngredient(i)">X</button>
+        </div>
+
+        <p class="error"
+          *ngIf="recipeForm.get('ingredients')['controls'][i].invalid && recipeForm.get('ingredients')['controls'][i].touched">
+          * error in ingredient data</p>
+      </div>
+    </div>
+
+    <div class="col-12 mt-2 text-center">
+      <div class="btn-group">
+        <button type="submit" class="btn btn-primary btn-md" [disabled]="recipeForm.invalid">
+          Save
+        </button>
+        <button type="submit" class="btn btn-secondary btn-md" (click)="onCancel()">
+          cancel
+        </button>
+      </div>
+      <p class="error big" *ngIf="recipeForm.invalid">Please complete the form</p>
+    </div>
+  </form>
+
+</div>
+
+
 <h1>
   recipe-form works!
 </h1>

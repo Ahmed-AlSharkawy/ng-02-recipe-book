@@ -5,7 +5,13 @@
   align-items: baseline;
 }
 
+.img-container {
+  max-height: max(400px, 60vh);
+  overflow: hidden;
+}
+
 img {
   width: 100%;
-  max-height: max(400px, 60vh);
+  height: 100%;
+  object-fit: cover;
 }

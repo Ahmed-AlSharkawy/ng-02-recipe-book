@@ -1,5 +1,7 @@
 <div class="card recipes-details">
-  <img src="{{ recipe.imagePath }}" class="card-img-top" alt="..." />
+  <div class="img-container">
+    <img src="{{ recipe.imagePath }}" class="card-img-top" alt="..." />
+  </div>
   <div class="card-body">
     <div class="card-title mb-3">
       <h5>{{ recipe.name }}</h5>
@@ -19,7 +21,7 @@
             <hr class="dropdown-divider" />
           </li>
           <li>
-            <button class="dropdown-item text-danger">Delete Recipe</button>
+            <button class="dropdown-item text-danger" (click)="onDeleteRecipe()">Delete Recipe</button>
           </li>
         </ul>
       </div>

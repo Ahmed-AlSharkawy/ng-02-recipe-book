@@ -1,0 +1,41 @@
+.btn-group {
+    width: min(80%, 250px);
+    margin: 0 auto;
+    display: flex;
+    gap: 1rem;
+}
+
+.error {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: red;
+    margin: 0 0 0.5rem 0;
+}
+
+.error.up {
+
+    margin: 0 0 0.25rem 0;
+}
+
+.error.big {
+    font-size: 1.2em;
+
+}
+
+.form-group {
+    margin-top: 0;
+    padding: 0 0.5rem;
+    margin-left: 0.5rem;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+.form-group.ng-invalid.ng-touched {
+    border-left: 3px solid red;
+    /* outline: 3px solid red; */
+    /* border-right: 1px solid red; */
+    /* border-radius: 20px; */
+}

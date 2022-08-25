@@ -1,5 +1,9 @@
 <div class="card mb-2 border-primary p-1 text-primary" [routerLink]="['view', index]"
-  routerLinkActive="bg-secondary text-white">
+  routerLinkActive="bg-secondary text-white" [ngClass]="{'bg-secondary text-white': editLink.isActive }">
+
+  <a style="display: none;" [routerLink]="['edit', index]" routerLinkActive="bg-secondary text-white"
+    #editLink="routerLinkActive">Typography</a>
+
   <img src="{{ recipe.imagePath }}" alt="{{ recipe.name }}" />
   <div class="card-body ">
     <h5 class="card-title">{{ recipe.name }}</h5>

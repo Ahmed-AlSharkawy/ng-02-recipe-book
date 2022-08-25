@@ -12,3 +12,13 @@
 .recipes-list {
   flex: 1 0 40%;
 }
+
+@media screen and (max-width: 520px) {
+  .recipes-container {
+    flex-direction: column;
+  }
+
+  #main {
+    /* margin-left: 216px; */
+  }
+}
