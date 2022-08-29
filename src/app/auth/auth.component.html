@@ -37,6 +37,9 @@
   </app-loading-spinner>
 </div>
 
+<app-alert [message]="message" (close)="removeMessage()" *ngIf="message"></app-alert>
+
+<!-- 
 <div *ngIf="message" class="{{'alert  alert-' + message.type +' alert-dismissible'}}" role="alert"
   style="max-width: min(95%, 850px); margin: 2rem auto;">
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="removeMessage()"></button>
@@ -50,3 +53,4 @@
   <hr>
   <p>{{message.message}}</p>
 </div>
+ -->

@@ -16,8 +16,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component';
 import { RecipeService } from './shared/recipe.service';
 import { AuthComponent } from './auth/auth.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './shared/authentication/auth-interceptor.service';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AlertComponent } from './shared/alert-component/alert.component';
+import { ConfirmationComponent } from './shared/confirmation-component/confirmation.component';
+import { PlaceholderDirective } from './shared/placeholder-directive/placeholder.directive';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, AppRoutingModule],
@@ -32,7 +35,10 @@ import { AuthInterceptorService } from './shared/authentication/auth-interceptor
     ShoppingFormComponent,
     RecipeFormComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlertComponent,
+    ConfirmationComponent,
+    PlaceholderDirective,
   ],
   providers: [
     ShoppingListService, RecipeService,

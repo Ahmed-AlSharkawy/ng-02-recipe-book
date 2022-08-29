@@ -1,0 +1,13 @@
+<div *ngIf="message" class="{{'alert  alert-' + message.type +' alert-dismissible'}}" role="alert"
+  style="max-width: min(95%, 850px); margin: 2rem auto;">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="removeMessage()"></button>
+  <div class="d-flex align-items-center">
+    <i class="{{'bi bi-'+ message.icon}}" style="font-size: 3rem; padding: 1rem"></i>
+    <div class="alert-heading">
+      <h3 class="">{{message.header}}</h3>
+      <h5>{{message.title}}</h5>
+    </div>
+  </div>
+  <hr>
+  <p>{{message.message}}</p>
+</div>
