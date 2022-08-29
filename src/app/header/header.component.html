@@ -8,26 +8,29 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAuthenticated">
           <a class="nav-link" aria-current="page" routerLink="/recipes" routerLinkActive="active">Recipes</a>
+        </li>
+        <li class="nav-item" *ngIf="!isAuthenticated">
+          <a class="nav-link" routerLink="/auth" routerLinkActive="active">Authentication</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/shopping-list" routerLinkActive="active">Shooping list</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto me-auto mb-2 mb-sm-0">
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="isAuthenticated">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            Dropdown
+            Mangae
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><button class="dropdown-item" (click)="storeRecipes()">Store Recipes</button></li>
+            <li><button class="dropdown-item" (click)="fetchRecipes()">Fetch Recipes</button></li>
             <li>
               <hr class="dropdown-divider" />
             </li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><button class="dropdown-item" (click)="onLogout()">Logout</button></li>
           </ul>
         </li>
       </ul>

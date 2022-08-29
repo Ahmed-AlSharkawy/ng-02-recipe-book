@@ -24,8 +24,10 @@ export class RecipeFormComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.index = +params['id'];
       this.isUpdate = params['id'] != undefined;
-      if (this.isUpdate)
+      if (this.isUpdate) {
         this.recipe = this.recipeService.getRecipe(this.index);
+        if (!this.recipe) this.router.navigate(['/recipes']);
+      }
       this.initForm();
     })
   }

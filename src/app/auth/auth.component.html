@@ -1,0 +1,52 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="reactiveForm" *ngIf="!submitting && !message">
+  <div class="col-12 mb-3">
+    <div class="form-floating">
+      <input type="email" class="form-control" id="email-input" formControlName="email" placeholder="email">
+      <label for="email-input" class="text-success">Email</label>
+    </div>
+    <p class="error" *ngIf="reactiveForm.get('email').invalid && reactiveForm.get('email').touched">
+      <span *ngIf="reactiveForm.get('email').errors['required']">* email is requires</span>
+      <span *ngIf="reactiveForm.get('email').errors['email']">* email should be in email pattern</span>
+    </p>
+  </div>
+
+  <div class="col-12 mb-3">
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password-input" formControlName="password" placeholder="password">
+      <label for="password-input" class="text-success">Password</label>
+    </div>
+    <p class="error" *ngIf="reactiveForm.get('password').invalid && reactiveForm.get('password').touched">
+      * password should be between 5 and 15 letters
+    </p>
+  </div>
+
+  <div class="mt-3 d-sm-flex justify-content-evenly align-items-center text-center">
+    <button type="submit" class="btn btn-primary row px-5" [disabled]="!reactiveForm.valid">
+      {{loginMode ? 'Login' : 'Sign Up'}}
+    </button>
+
+    <span class="switch text-primary row  d-block" (click)="switchFormMode()">Switch to {{loginMode ? 'Sign Up' :
+      'Login'}}
+      mode.</span>
+  </div>
+</form>
+
+<div *ngIf="submitting" class="d-flex align-items-center justify-content-center mt-5">
+  <app-loading-spinner>
+
+  </app-loading-spinner>
+</div>
+
+<div *ngIf="message" class="{{'alert  alert-' + message.type +' alert-dismissible'}}" role="alert"
+  style="max-width: min(95%, 850px); margin: 2rem auto;">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="removeMessage()"></button>
+  <div class="d-flex align-items-center">
+    <i class="{{'bi bi-'+ message.icon}}" style="font-size: 3rem; padding: 1rem"></i>
+    <div class="alert-heading">
+      <h3 class="">{{message.header}}</h3>
+      <h5>{{message.title}}</h5>
+    </div>
+  </div>
+  <hr>
+  <p>{{message.message}}</p>
+</div>
