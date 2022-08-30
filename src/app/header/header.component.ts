@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../shared/authentication/auth.service';
+import { AuthService } from '../auth/helpers/auth.service';
 import { ConfirmationComponent } from '../shared/confirmation-component/confirmation.component';
 import { DataStorageService } from '../shared/data-storage.service';
 import { PlaceholderDirective } from '../shared/placeholder-directive/placeholder.directive';

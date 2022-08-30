@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthResponse, AuthService } from '../shared/authentication/auth.service';
+import { AuthResponse, AuthService } from './helpers/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -19,7 +19,7 @@ export class AuthComponent implements OnInit {
   message: { header: string, title: string, message: string, type: string, icon: string } = null;
 
   constructor(private authService: AuthService, private router: Router) {
-    this.loginMode = false;
+    this.loginMode = true;
   }
 
   ngOnInit() {
@@ -40,9 +40,9 @@ export class AuthComponent implements OnInit {
 
     authObsevable.subscribe({
       next: response => this.router.navigate(['/recipes']),
-      error: error => this.setMessage(error, 'error'),
+      error: error => { this.setMessage(error, 'error'); this.submitting = false; },
       complete: () => console.log('completed successfuly')
-    }).add(() => this.submitting = false);
+    }).add(() => console.log('added after all operation is done'));
 
     this.reactiveForm.reset();
   }

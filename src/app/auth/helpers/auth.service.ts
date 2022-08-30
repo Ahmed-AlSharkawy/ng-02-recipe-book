@@ -2,7 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
-import { RecipeService } from '../recipe.service';
+import { environment } from 'src/environments/environment';
+import { RecipeService } from '../../recipes/helpers/recipe.service';
 import { User } from './user.model';
 
 export interface AuthResponse {
@@ -37,7 +38,7 @@ export class AuthService {
 
   signUp(credintials: {}) {
     return this.http.post<AuthResponse>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDUbw7BWpAoaFoJIeGZh1xX3d0-oTPirlg',
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
       { ...credintials, returnSecureToken: true }
     ).pipe(
       catchError(error => this.handleErrorResponse(error, this.signUpErrorResponses)),
@@ -47,7 +48,7 @@ export class AuthService {
 
   login(credintials: {}) {
     return this.http.post<AuthResponse>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDUbw7BWpAoaFoJIeGZh1xX3d0-oTPirlg',
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey,
       { ...credintials, returnSecureToken: true }
     ).pipe(
       catchError(error => this.handleErrorResponse(error, this.loginErrorResponses)),

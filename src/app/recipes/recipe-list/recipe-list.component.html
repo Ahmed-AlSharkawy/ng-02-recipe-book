@@ -1,17 +1,23 @@
+<app-confirmation [message]="confirmationMessage" (close)="onClearRecipes($event)" *ngIf="showConfirmDialog">
+</app-confirmation>
+
 <div class="row">
-  <div class="col-xs-12">
-    <div class="btn btn-primary d-block" routerLink="add">New Recipe</div>
+  <div class="col-6">
+    <button class="btn btn-primary w-100" routerLink="add">New Recipe</button>
+  </div>
+  <div class="col-6">
+    <button class="btn btn-outline-danger w-100" (click)="clearRecipes()" [disabled]="noRecipes">Clear Recipes</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
     <hr />
   </div>
-
-  <div class="col-xs-12" *ngFor="let recipe of recipes; let i = index">
-    <app-recipe-item [recipe]="recipe" [index]="i"></app-recipe-item>
-  </div>
-
-  <!--
-  <div class="col-xs-12" *ngFor="let recipe of recipes; let i = index"
-    (click)="onShowRecipeDetails(i)">
-    <app-recipe-item [recipe]="recipe"></app-recipe-item>
-  </div>
--->
 </div>
+
+<div class="row" *ngFor="let recipe of recipes; let i = index">
+  <app-recipe-item [recipe]="recipe" [index]="i"></app-recipe-item>
+</div>
+
+<app-alert [message]="noRecipesMessage" (close)="showAlert = false" *ngIf="showAlert"></app-alert>

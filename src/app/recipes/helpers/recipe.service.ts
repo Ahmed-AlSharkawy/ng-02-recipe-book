@@ -1,9 +1,9 @@
 import { Injectable, Output } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Recipe } from '../recipes/recipe-model';
-import { DataStorageService } from './data-storage.service';
-import { Ingredient } from './ingredient.model';
-import { ShoppingListService } from './shopping-list.service';
+import { Recipe } from './recipe-model';
+import { DataStorageService } from '../../shared/data-storage.service';
+import { Ingredient } from '../../shopping-list/helpers/ingredient.model';
+import { ShoppingListService } from 'src/app/shopping-list/helpers/shopping-list.service';
 
 @Injectable()
 export class RecipeService {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Ingredient } from 'src/app/shared/ingredient.model';
-import { RecipeService } from 'src/app/shared/recipe.service';
-import { Recipe } from '../recipe-model';
+import { Ingredient } from 'src/app/shopping-list/helpers/ingredient.model';
+import { RecipeService } from 'src/app/recipes/helpers/recipe.service';
+import { Recipe } from '../helpers/recipe-model';
 
 @Component({
   selector: 'app-recipe-form',
