@@ -92,6 +92,6 @@ export class AuthService {
       let message = error.error.error.message;
       errorMessage = errorResponses[message] != undefined ? errorResponses[message] : errorMessage;
     }
-    return throwError(() => { return { ...error, message: errorMessage } })
+    return throwError(() => { return { ...error, message: errorMessage } });
   }
 }
