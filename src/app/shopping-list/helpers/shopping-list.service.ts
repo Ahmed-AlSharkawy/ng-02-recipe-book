@@ -27,7 +27,6 @@ export class ShoppingListService {
     return this.ingredients[index];
   }
 
-
   addIngredient(name: string, amount: number) {
     let found: boolean = false;
     for (const ingredient of this.ingredients) {

@@ -1,9 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
+import * as fromApp from 'src/app/store/app.reducer';
 import { environment } from 'src/environments/environment';
 import { RecipeService } from '../../recipes/helpers/recipe.service';
+import { AuthSuccess, Logout } from './store/auth.actions';
 import { User } from './user.model';
 
 export interface AuthResponse {
@@ -19,22 +22,36 @@ export interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  public user = new BehaviorSubject<User>(null);
+  // public user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer;
 
-  private signUpErrorResponses = {
+  private _signUpErrorResponses = {
     'EMAIL_EXISTS': 'The email address is already in use by another account.',
     'OPERATION_NOT_ALLOWED': 'Password sign -in is disabled for this project.',
     'TOO_MANY_ATTEMPTS_TRY_LATER': 'We have blocked all requests from this device due to unusual activity.Try again later.',
   }
 
-  private loginErrorResponses = {
+  private _loginErrorResponses = {
     "EMAIL_NOT_FOUND": "There is no user record corresponding to this identifier.The user may have been deleted.",
     "INVALID_PASSWORD": "The password is invalid or the user does not have a password.",
     "USER_DISABLED": "The user account has been disabled by an administrator.",
   }
 
-  constructor(private http: HttpClient, private router: Router, private recipeService: RecipeService) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private recipeService: RecipeService,
+    private store: Store<fromApp.AppStateModel>
+
+  ) { }
+
+  get loginErrorResponses() {
+    return this._loginErrorResponses;
+  }
+
+  get signUpErrorResponses() {
+    return this._signUpErrorResponses;
+  }
 
   signUp(credintials: {}) {
     return this.http.post<AuthResponse>(
@@ -57,7 +74,8 @@ export class AuthService {
   }
 
   logout() {
-    this.user.next(null);
+    // this.user.next(null);
+    this.store.dispatch(new Logout);
     this.router.navigate(['/auth']);
     this.recipeService.clearRecipes();
     localStorage.removeItem('user');
@@ -65,7 +83,15 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
-    this.tokenExpirationTimer = setTimeout(() => this.logout(), expirationDuration);
+    this.tokenExpirationTimer = setTimeout(() => this.store.dispatch(new Logout), expirationDuration);
+    // this.tokenExpirationTimer = setTimeout(() => this.logout(), expirationDuration);
+  }
+
+  clearLogoutTimer() {
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+      this.tokenExpirationTimer = null;
+    }
   }
 
   autoLogin() {
@@ -74,14 +100,17 @@ export class AuthService {
     if (!user) return;
     const loggedUser = new User(user.email, user.id, user._token, new Date(user._tokenExpirationDate));
     if (!loggedUser.token) return;
-    this.user.next(loggedUser);
+
+    // this.user.next(loggedUser);
+    this.store.dispatch(new AuthSuccess(loggedUser));
     this.autoLogout(new Date(user._tokenExpirationDate).getTime() - new Date().getTime());
   }
 
   handleAuthResponse(response: AuthResponse) {
     const expirationDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
     const user = new User(response.email, response.localId, response.idToken, expirationDate);
-    this.user.next(user);
+    // this.user.next(user);
+    this.store.dispatch(new AuthSuccess(user));
     localStorage.setItem('user', JSON.stringify(user));
     this.autoLogout(+response.expiresIn * 1000);
   }

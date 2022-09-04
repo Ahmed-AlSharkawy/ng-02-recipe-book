@@ -1,8 +1,11 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { RecipeService } from '../helpers/recipe.service';
 import { Recipe } from '../helpers/recipe-model';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as fromApp from 'src/app/store/app.reducer';
+import { SetRecipes } from '../helpers/store/recipes.actions';
 
 @Component({
   selector: 'app-recipe-list',
@@ -19,7 +22,11 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   noRecipesMessage: { header: string, title: string, message: string, type: string, icon: string };
   showAlert: boolean;
 
-  constructor(private recipeService: RecipeService, private router: Router) {
+  constructor(
+    private recipeService: RecipeService,
+    private router: Router,
+    private store: Store<fromApp.AppStateModel>
+  ) {
     this.showConfirmDialog = false;
     this.confirmationMessage = null;
     this.showAlert = false;
@@ -31,15 +38,21 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       icon: 'bug'
     };
 
-    this.recipes = recipeService.getRecipes();
-    this.noRecipes = !this.recipes.length;
-    this.showAlert = !this.recipes.length;
+    this.recipesSubscription = store.select('recipes').pipe(map(state => state.recipes)).subscribe(recipes => {
+      this.recipes = recipes;
+      this.noRecipes = !recipes.length;
+      this.showAlert = !recipes.length;
+    })
 
-    this.recipesSubscription = recipeService.recipesChanged.subscribe(
-      (recipes: Recipe[]) => {
-        this.recipes = recipes; this.noRecipes = !recipes.length; this.showAlert = !recipes.length;
-      }
-    );
+    // this.recipes = recipeService.getRecipes();
+    // this.noRecipes = !this.recipes.length;
+    // this.showAlert = !this.recipes.length;
+
+    // this.recipesSubscription = recipeService.recipesChanged.subscribe(
+    //   (recipes: Recipe[]) => {
+    //     this.recipes = recipes; this.noRecipes = !recipes.length; this.showAlert = !recipes.length;
+    //   }
+    // );
   }
 
   ngOnInit() { }
@@ -52,7 +65,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   onClearRecipes(confirmed: boolean) {
     this.showConfirmDialog = false;
     if (confirmed) {
-      this.recipeService.clearRecipes();
+      this.store.dispatch(new SetRecipes([]));
+      // this.recipeService.clearRecipes();
       this.router.navigate(['/recipes']);
     }
   }

@@ -1,4 +1,4 @@
-<div class="card mb-2 border-primary p-1 text-primary" [routerLink]="['view', index]"
+<div class="card mb-2 border-primary p-1 text-primary" [routerLink]="['view', index]" (click)="onSelectRecipe()"
   routerLinkActive="bg-secondary text-white" [ngClass]="{'bg-secondary text-white': editLink.isActive }">
 
   <a style="display: none;" [routerLink]="['edit', index]" routerLinkActive="bg-secondary text-white"

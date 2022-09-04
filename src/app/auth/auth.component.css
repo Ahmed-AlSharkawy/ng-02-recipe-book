@@ -46,6 +46,7 @@ select.ng-invalid.ng-touched {
 form .switch {
     cursor: pointer;
     font-weight: bold;
+    text-shadow: -1px 0px 0 #fff, 0px -1px 0 #fff, 0px 0px 0 #fff, 0px 1px 0 #fff;
 }
 
 form .switch:hover {

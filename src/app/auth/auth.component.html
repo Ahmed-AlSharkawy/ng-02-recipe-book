@@ -1,10 +1,11 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="reactiveForm" *ngIf="!submitting && !message">
+<form (ngSubmit)="onSubmit()" [formGroup]="reactiveForm" *ngIf="!submitting && !message"
+  [@containerState]="containerState">
   <div class="col-12 mb-3">
     <div class="form-floating">
       <input type="email" class="form-control" id="email-input" formControlName="email" placeholder="email">
       <label for="email-input" class="text-success">Email</label>
     </div>
-    <p class="error" *ngIf="reactiveForm.get('email').invalid && reactiveForm.get('email').touched">
+    <p class="error" [@emailError]="" *ngIf="reactiveForm.get('email').invalid && reactiveForm.get('email').touched">
       <span *ngIf="reactiveForm.get('email').errors['required']">* email is requires</span>
       <span *ngIf="reactiveForm.get('email').errors['email']">* email should be in email pattern</span>
     </p>
@@ -15,7 +16,8 @@
       <input type="password" class="form-control" id="password-input" formControlName="password" placeholder="password">
       <label for="password-input" class="text-success">Password</label>
     </div>
-    <p class="error" *ngIf="reactiveForm.get('password').invalid && reactiveForm.get('password').touched">
+    <p class="error" [@passwordError]=""
+      *ngIf="reactiveForm.get('password').invalid && reactiveForm.get('password').touched">
       * password should be between 5 and 15 letters
     </p>
   </div>
@@ -35,7 +37,9 @@
   <app-loading-spinner></app-loading-spinner>
 </div>
 
-<app-alert [message]="message" (close)="removeMessage()" *ngIf="message"></app-alert>
+<div [@errorMSG]="" (@errorMSG.done)="animationDone($event)" (@errorMSG.start)="animationStart($event)" *ngIf="message">
+  <app-alert [message]="message" (close)="removeMessage()"></app-alert>
+</div>
 
 <!-- 
 <div *ngIf="message" class="{{'alert  alert-' + message.type +' alert-dismissible'}}" role="alert"
